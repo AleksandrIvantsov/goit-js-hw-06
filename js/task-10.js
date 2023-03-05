@@ -16,7 +16,8 @@ function onButtonCreateClick() {
 	if (Number(input.value) < input.min || Number(input.value) > input.max) {
 		return alert(`Введіть число від ${input.min} до ${input.max}`);
 	}
-	createBoxes(input.value);
+
+	divBoxes.append(...createBoxes(input.value));
 	input.value = "";
 }
 
@@ -26,6 +27,7 @@ function onButtonDestroyClick() {
 }
 
 function createBoxes(amount) {
+	const divElements = [];
 	let divDimensions = 30;
 
 	for (let i = 1; i <= amount; i += 1) {
@@ -33,9 +35,10 @@ function createBoxes(amount) {
 		div.style.width = `${divDimensions}px`;
 		div.style.height = `${divDimensions}px`;
 		div.style.backgroundColor = getRandomHexColor();
-		divBoxes.append(div);
+		divElements.push(div);
 		divDimensions += 10;
 	}
+	return divElements;
 }
 
 function destroyBoxes() {
